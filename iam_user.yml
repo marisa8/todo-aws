@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: 2010-09-09 #CloudFormationテンプレートのバージョン宣言
+Description: Create IAM User #管理コンソールやCLIでこのスタックを見たときの説明
+Resources:
+  IAMUser:
+    Type: AWS::IAM::User #AWSリソースタイプを指定
+    Properties:
+      UserName: CI-CD-HandsonUser #IAMユーザー名
+      ManagedPolicyArns: ["arn:aws:iam::aws:policy/AdministratorAccess"] #管理者権限を付与
+  AccessKey:
+    Type: AWS::IAM::AccessKey #IAMアクセスキーを作る
+    Properties:
+      Status: Active #すぐ使える状態で発行
+      UserName: !Ref IAMUser #ユーザー名を参照
+
+Outputs: #出力値/デプロイ後にCLIやコンソールで確認
+  IAMUserName:
+    Value: !Ref IAMUser
+    Export:
+      Name: CI-CD-HandsonUser
+  AccessKeyId:
+    Value: !Ref AccessKey #IAMアクセスキーのIDを出力
+  SecretAccessKey:
+    Value: !GetAtt AccessKey.SecretAccessKey #アクセスキーリソースからシークレットキーを取得して出力
