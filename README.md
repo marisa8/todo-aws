@@ -43,3 +43,39 @@
   "description": "牛乳を買う",
   "created_at": "2025-06-30T12:34:56Z"
 }
+```
+
+## ✅ AWS CLIハンズオン手順まとめ
+
+このドキュメントは、AWS IAMユーザーをCloudFormationから作成し、そのユーザーのアクセスキーを使ってAWS CLIからDynamoDBの「Todos」テーブルを作成・確認する流れをまとめたものです。
+
+---
+
+## ✅ 1️⃣ IAMユーザーのCloudFormationテンプレート
+
+以下のCloudFormationテンプレートを使い、管理者権限のIAMユーザーを作成します。
+
+```yaml
+AWSTemplateFormatVersion: 2010-09-09
+Description: Create IAM User
+Resources:
+  IAMUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: CI-CD-HandsonUser
+      ManagedPolicyArns: ["arn:aws:iam::aws:policy/AdministratorAccess"]
+  AccessKey:
+    Type: AWS::IAM::AccessKey
+    Properties:
+      Status: Active
+      UserName: !Ref IAMUser
+
+Outputs:
+  IAMUserName:
+    Value: !Ref IAMUser
+    Export:
+      Name: CI-CD-HandsonUser
+  AccessKeyId:
+    Value: !Ref AccessKey
+  SecretAccessKey:
+    Value: !GetAtt AccessKey.SecretAccessKey
