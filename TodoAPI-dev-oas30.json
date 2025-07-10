@@ -1,0 +1,115 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "TodoAPI",
+    "version" : "2025-07-08T15:05:43Z"
+  },
+  "servers" : [ {
+    "url" : "https://z2stm25deg.execute-api.ap-northeast-1.amazonaws.com/{basePath}",
+    "variables" : {
+      "basePath" : {
+        "default" : "dev"
+      }
+    }
+  } ],
+  "paths" : {
+    "/todos" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Empty"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Empty"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Empty"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/todos/{id}" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Empty"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Empty"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Empty" : {
+        "title" : "Empty Schema",
+        "type" : "object"
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Deploy API Gateway using OpenAPI spec in S3
+
+Parameters:
+  OpenApiS3Url:
+    Type: String
+    Description: S3 URL for OpenAPI spec
+    Default: "s3://my-todo-api-spec-bucket/openapi/openapi.json"
+
+Resources:
+  TodoRestApi:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: TodoAPI
+      Body:
+        Fn::Transform:
+          Name: "AWS::Include"
+          Parameters:
+            Location: !Ref OpenApiS3Url
+
+Outputs:
+  ApiId:
+    Value: !Ref TodoRestApi
+    Export:
+      Name: TodoApiId
